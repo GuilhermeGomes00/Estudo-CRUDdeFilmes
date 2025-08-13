@@ -158,3 +158,4 @@ C:\Users\guigo\Documents\brincadeiras do C afiado\CRUD-FilmesAPI\bin\Debug\net8.
 C:\Users\guigo\Documents\brincadeiras do C afiado\CRUD-FilmesAPI\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\guigo\Documents\brincadeiras do C afiado\CRUD-FilmesAPI\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\guigo\Documents\brincadeiras do C afiado\CRUD-FilmesAPI\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\guigo\Documents\brincadeiras do C afiado\CRUD-FilmesAPI\obj\Debug\net8.0\CRUD-FilmesAPI.sourcelink.json

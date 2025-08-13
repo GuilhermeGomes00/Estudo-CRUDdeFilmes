@@ -46,8 +46,20 @@ public static class FilmesRotas
                 return Filmes;
             });
             
+            // Retornando por Gênero:
+            EndPointsFilmes.MapGet("BuscaGenero/{genero}", async (string genero, AppDbContext ctx) =>
+            {
+                var BuscaFilmesGenero = await ctx
+                    .Filme
+                    .Where
+                        (Filmes => genero == Filmes.Genero)
+                    .Select(Filmes => new FilmesDTO(Filmes.Id, Filmes.Titulo, Filmes.AnoLancamento, Filmes.Diretor, Filmes.Genero))
+                    .ToListAsync();
+                return BuscaFilmesGenero;
+            });
+            
             // Atualizar Titulo Filme
-            EndPointsFilmes.MapPut("{Title}", async (string title ,UptFilmeRequest request, AppDbContext ctx) =>
+            EndPointsFilmes.MapPut("Atualizar/{Title}", async (string title ,UptFilmeRequest request, AppDbContext ctx) =>
             {
                 var Filme = await ctx.Filme.SingleOrDefaultAsync(Filmes => Filmes.Titulo == title);
                 if (Filme == null) return Results.NotFound();
@@ -57,10 +69,12 @@ public static class FilmesRotas
                 return Results.Ok(new FilmesDTO(Filme.Id, Filme.Titulo, Filme.AnoLancamento, Filme.Diretor, Filme.Genero));
             });
             
-            // Soft Delete
-            EndPointsFilmes.MapDelete("{Title}", async (string title, AppDbContext ctx) =>
+            // So ft Delete
+            EndPointsFilmes.MapDelete("SoftDelete/{Title}", async (string title, AppDbContext ctx) =>
             {
-                var filme = await ctx.Filme.SingleOrDefaultAsync(filme => filme.Titulo == title);
+                var filme = await ctx
+                    .Filme
+                    .SingleOrDefaultAsync(filme => filme.Titulo == title);
                 if (filme == null) return Results.NotFound();
                 
                 filme.Desativar();
@@ -68,6 +82,24 @@ public static class FilmesRotas
                 await ctx.SaveChangesAsync();
                 return Results.Ok();
 
+            });
+            
+            // Delete
+            EndPointsFilmes.MapDelete("DeletarFilme/{id}", async (Guid id, AppDbContext ctx) =>
+            {
+                var filme = await  ctx
+                    .Filme
+                    .SingleOrDefaultAsync(Filme => Filme.Id == id);
+                if (filme == null) return Results.NotFound();
+
+                var DeleteFilme = await ctx
+                    .Filme
+                    .Where(DeleteFilme => 
+                        id == DeleteFilme.Id)
+                    .ExecuteDeleteAsync();
+                
+                await ctx.SaveChangesAsync();
+                return Results.Ok(DeleteFilme);
             });
         }   
     
