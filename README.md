@@ -38,4 +38,4 @@ O objetivo é **praticar lógica de programação** e a criação de APIs minima
 
 ## 📖 Observação
 
-> Este é um projeto **exclusivamente para fins de estudo**, com foco no aprendizado de **Minimal API** e **ORM**. Não é recomendado para uso em produção sem as devidas validações e melhorias de segurança.
+> Este é um projeto **exclusivamente para fins de estudo**, com foco no aprendizado de **Minimal API** e **ORM**.
